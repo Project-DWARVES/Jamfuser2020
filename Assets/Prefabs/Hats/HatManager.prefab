@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2878825358607868390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2878825358607868389}
+  - component: {fileID: 2878825358607868388}
+  m_Layer: 0
+  m_Name: HatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2878825358607868389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878825358607868390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2878825358607868388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878825358607868390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899e7619e4f59ab43a5e693fff6e595a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatCollection:
+  - {fileID: 8027519452468024072, guid: 631c1673da8c66641b6cab418a7412b2, type: 3}
+  - {fileID: 4680201648844939267, guid: f349c3f0efff42748b7f72489c440cda, type: 3}
+  - {fileID: 7732393460957994378, guid: eb72c81de5147924b88bd22e876c72ca, type: 3}
+  - {fileID: 8871382224585980211, guid: 48dc375ac46955c48a980152587c2b4a, type: 3}
+  - {fileID: 7814836639401598263, guid: 33fc6275ea9e35e47bdd4e5fcbfcd4b4, type: 3}
+  - {fileID: 4347148593636238350, guid: 9cfeb412e579e6a4bba7b0036e112839, type: 3}
+  player1Hat: 0
+  player2Hat: 0
+  player3Hat: 0
+  player4Hat: 0
