@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rbody;
 
     [Header("Setup")]
-    public Vector3 spawnTransform;
+    public Transform spawnTransform;
     public float respawnDelay;
 
     [Header("Movement Variables")]
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnTime);
 
-        transform.position = spawnTransform;
+        transform.position = spawnTransform.position;
         rbody.velocity = Vector3.zero;
     }
 }

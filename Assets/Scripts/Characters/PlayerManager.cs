@@ -11,9 +11,11 @@ public class PlayerManager : MonoBehaviour
 
     public Transform[] spawnPoints;
 
+    CameraFollower cameraFollower;
 
     void Start()
     {
+        cameraFollower = FindObjectOfType<CameraFollower>();
         Initialise();
     }
 
@@ -21,12 +23,14 @@ public class PlayerManager : MonoBehaviour
     {
         //Spawn Players
         int playerNumber = 0;
+        numberOfPlayers = PlayerPrefs.GetInt("PlayerCount", 1);
 
         for (int i = 0; i < numberOfPlayers; i++)
         {
             PlayerController _player = Instantiate(playerPrefab[playerNumber], spawnPoints[playerNumber]);
             _player.playerID = playerNumber;
-            _player.spawnTransform = spawnPoints[playerNumber].position;
+            _player.spawnTransform = spawnPoints[playerNumber];
+            cameraFollower.playerTransforms.Add(_player.transform);
 
             playerNumber++;
         }
