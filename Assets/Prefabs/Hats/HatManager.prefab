@@ -43,7 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e7619e4f59ab43a5e693fff6e595a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hatCollection: []
+  hatCollection:
+  - {fileID: 8027519452468024072, guid: 631c1673da8c66641b6cab418a7412b2, type: 3}
+  - {fileID: 4680201648844939267, guid: f349c3f0efff42748b7f72489c440cda, type: 3}
+  - {fileID: 7732393460957994378, guid: eb72c81de5147924b88bd22e876c72ca, type: 3}
+  - {fileID: 8871382224585980211, guid: 48dc375ac46955c48a980152587c2b4a, type: 3}
+  - {fileID: 7814836639401598263, guid: 33fc6275ea9e35e47bdd4e5fcbfcd4b4, type: 3}
+  - {fileID: 4347148593636238350, guid: 9cfeb412e579e6a4bba7b0036e112839, type: 3}
   player1Hat: 0
   player2Hat: 0
   player3Hat: 0

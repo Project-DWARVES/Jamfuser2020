@@ -17,12 +17,21 @@ public class CharacterSelectScreen : MonoBehaviour
     }
     #endregion
 
-    public int playersReady;
-
+    void Start()
+    {
+        PlayerPrefs.DeleteKey("Player0");
+        PlayerPrefs.DeleteKey("Player1");
+        PlayerPrefs.DeleteKey("Player2");
+        PlayerPrefs.DeleteKey("Player3");
+    }
     public void StartGame()
     {
-        PlayerPrefs.SetInt("PlayerCount", playersReady);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
+    }
+
+    public void PlayerReady(int playerNumber)
+    {
+        PlayerPrefs.SetInt("Player" + playerNumber, 1);
     }
 
 }

@@ -15,15 +15,17 @@ public class HatManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+
+        DontDestroyOnLoad(this.gameObject);
     }
     #endregion
 
     public List<GameObject> hatCollection = new List<GameObject>();
 
-    public int player1Hat;
-    public int player2Hat;
-    public int player3Hat;
-    public int player4Hat;
+    public int player1Hat = 0;
+    public int player2Hat = 0;
+    public int player3Hat = 0;
+    public int player4Hat = 0;
 
     public void ConfirmHat(int player, int hat)
     {
@@ -64,4 +66,6 @@ public class HatManager : MonoBehaviour
                 return null;
         }
     }
+
+    
 }

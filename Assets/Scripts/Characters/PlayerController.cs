@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody rbody;
 
     [Header("Setup")]
+    public Transform hatTransform;
     public Transform spawnTransform;
     public float respawnDelay;
+
 
     [Header("Movement Variables")]
     public float tilt;
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
         //Init
         player = ReInput.players.GetPlayer(playerID);
+
+        GameObject _hat = Instantiate(HatManager.instance.LoadHat(playerID), hatTransform.position, hatTransform.rotation, hatTransform);
+        _hat.transform.localPosition = Vector3.zero;
     }
 
     void FixedUpdate()

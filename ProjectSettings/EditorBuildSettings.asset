@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SCN_CharacterSelect.unity
     guid: 3aa3ef158f24e1b4fa7bb008cb6b38c0
+  - enabled: 1
+    path: Assets/Scenes/SCN_Import.unity
+    guid: 1f758052d16e85744aed1f19a3db0815
   m_configObjects: {}

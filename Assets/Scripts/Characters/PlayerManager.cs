@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Range (1,4)]
+    [Range(1, 4)]
     public int numberOfPlayers;
 
     public PlayerController[] playerPrefab;
@@ -21,24 +21,29 @@ public class PlayerManager : MonoBehaviour
 
     void Initialise()
     {
-        //Spawn Players
-        int playerNumber = 0;
-        numberOfPlayers = PlayerPrefs.GetInt("PlayerCount", 1);
+        if (PlayerPrefs.GetInt("Player0") == 1)
+            SpawnPlayer(0);
+        if (PlayerPrefs.GetInt("Player1") == 1)
+            SpawnPlayer(1);
+        if (PlayerPrefs.GetInt("Player2") == 1)
+            SpawnPlayer(2);
+        if (PlayerPrefs.GetInt("Player3") == 1)
+            SpawnPlayer(3);
 
-        for (int i = 0; i < numberOfPlayers; i++)
-        {
-            PlayerController _player = Instantiate(playerPrefab[playerNumber], spawnPoints[playerNumber]);
-            _player.playerID = playerNumber;
-            _player.spawnTransform = spawnPoints[playerNumber];
-            cameraFollower.playerTransforms.Add(_player.transform);
 
-            playerNumber++;
-        }
 
         if (numberOfPlayers == 1)
         {
             SpawnAIPlayers();
         }
+    }
+
+    void SpawnPlayer(int player)
+    {
+        PlayerController _player = Instantiate(playerPrefab[player], spawnPoints[player]);
+        _player.playerID = player;
+        _player.spawnTransform = spawnPoints[player];
+        cameraFollower?.playerTransforms.Add(_player.transform);
     }
 
     void SpawnAIPlayers()

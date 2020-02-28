@@ -9,6 +9,8 @@ public class HatSelector : MonoBehaviour
     public List<GameObject> hatCollection = new List<GameObject>();
     public int playerID;
     public int selectedHat = 0;
+    public GameObject ready;
+    public GameObject graphics;
 
     //ReWired
     private Player player;
@@ -17,6 +19,7 @@ public class HatSelector : MonoBehaviour
     float timer;
 
     //Ready
+    bool hasJoined = false;
     bool isReady = false;
 
     private void Start()
@@ -27,6 +30,8 @@ public class HatSelector : MonoBehaviour
         {
             hat.gameObject.SetActive(false);
         }
+
+        graphics.SetActive(false);
 
         hatCollection[Mathf.CeilToInt(selectedHat)].SetActive(true);
     }
@@ -47,10 +52,6 @@ public class HatSelector : MonoBehaviour
 
     void Update()
     {
-        if (isReady)
-            return;
-
-
         timer += Time.deltaTime;
 
         if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f)
@@ -61,8 +62,18 @@ public class HatSelector : MonoBehaviour
 
         if (player.GetButtonDown("Boost"))
         {
-            GetReady();
+            if (!hasJoined)
+            {
+                hasJoined = true;
+                graphics.SetActive(true);
+                return;
+            }
 
+            GetReady();
+        }
+
+        if (player.GetButtonDown("StartButton"))
+        {
             if (isReady)
             {
                 CharacterSelectScreen.instance.StartGame();
@@ -72,8 +83,14 @@ public class HatSelector : MonoBehaviour
 
     void GetReady()
     {
+        ready.SetActive(true);
         isReady = true;
-        CharacterSelectScreen.instance.playersReady++;
+        CharacterSelectScreen.instance.PlayerReady(playerID);
         HatManager.instance.ConfirmHat(playerID, selectedHat);
+    }
+
+    void JoinGame()
+    {
+
     }
 }
