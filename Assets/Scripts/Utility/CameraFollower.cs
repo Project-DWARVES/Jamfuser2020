@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollower : MonoBehaviour
 {
     // Distance to keep between camera and players
-    float followDistance = 2f;
+    public float followDistance = 2f;
     // Obstacle detection range
     public float avoidanceRange = 2f;
     // Distance camera should move to avoid impact
@@ -77,25 +77,13 @@ public class CameraFollower : MonoBehaviour
         return zoom;
     }
     
-    void Update()
+    void FixedUpdate()
     {
         CalculateIdealPosition();
 
-        // Check if camera will impact anything
-        // if(Physics.Raycast(transform.position, transform.forward, avoidanceRange))
-        // {
-        //     idealPosition.x += Mathf.Sign(transform.position.x) * avoidanceDistance;
-        //     Debug.DrawRay(transform.position, transform.forward * avoidanceRange, Color.red);
-        // }
-        // else
-        // {
-        //     Debug.DrawRay(transform.position, transform.forward * avoidanceRange, Color.green);
-        // }
-
         idealPosition.y = playerTransforms[0].position.y + followDistance + ZoomChange();
 
-        //transform.position = Vector3.Lerp(transform.position, idealPosition, Time.deltaTime);
-        rigidbody.MovePosition(Vector3.Lerp(transform.position, idealPosition, Time.deltaTime));
+        rigidbody.MovePosition(Vector3.Lerp(transform.position, idealPosition, Time.deltaTime * avoidanceSpeed));
     }
 
     void OnCollisionStay(Collision other)

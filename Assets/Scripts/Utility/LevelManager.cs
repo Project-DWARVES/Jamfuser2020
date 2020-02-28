@@ -35,12 +35,13 @@ public class LevelManager : MonoBehaviour
         segments = new GameObject[numberOfSegments];
 
         segments[0] = Instantiate(startPrefab, new Vector3(0, -segmentSize, 0), Quaternion.identity, transform);
-        segments[numberOfSegments - 1] = Instantiate(endPrefab, new Vector3(0, -(numberOfSegments - 1) * segmentSize, 0), Quaternion.identity, transform);
-
+        
         for(int i = 1; i < numberOfSegments - 1; i++)
         {
-            segments[i] = Instantiate(segmentPrefabs[Random.Range(0, segmentPrefabs.Count)], new Vector3(0, -segmentSize * i, 0), Quaternion.identity, transform);
+            segments[i] = Instantiate(segmentPrefabs[Random.Range(0, segmentPrefabs.Count)], new Vector3(0, -segmentSize * (i + 1), 0), Quaternion.identity, transform);
         }
+
+        segments[numberOfSegments - 1] = Instantiate(endPrefab, new Vector3(0, -(numberOfSegments) * segmentSize, 0), Quaternion.identity, transform);
     }
 
     void Start()
@@ -50,6 +51,6 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-
+        level.GetComponent<Rigidbody>().MovePosition(level.position - level.transform.up * fallingSpeed * Time.deltaTime);
     }
 }
