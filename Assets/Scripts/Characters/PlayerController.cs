@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Transform spawnTransform;
     public float respawnDelay;
 
+    Animator animator;
 
     [Header("Movement Variables")]
     public float tilt;
@@ -40,6 +41,10 @@ public class PlayerController : MonoBehaviour
         //Component Assignment
         audioSource = GetComponent<AudioSource>();
         rbody = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+
+        if(animator)
+            animator.SetTrigger("Jumped");
 
         //Init
         try // try to initialise as a player
@@ -130,7 +135,9 @@ public class PlayerController : MonoBehaviour
             #endregion
 
             // try to boost on cooldown
-            doBoost();
+            // Let's onyl boost every now and then
+            if(Random.Range(0, 100) < 1)
+                doBoost();
 
             Vector3 dirToTarget = (target - this.transform.position).normalized;
 
@@ -150,6 +157,8 @@ public class PlayerController : MonoBehaviour
         if(boostCooldownTimer >= boostCooldown)
         {
             //Debug.Log("Player " + playerID + " used Boost");
+            if(animator)
+                animator.SetTrigger("Dash");
 
             boostCooldownTimer = 0;
 
@@ -165,6 +174,9 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
+        if(animator)
+            animator.SetTrigger("SwoopIn");
+        
         //Play Death Sound
         if (nut.player == this)
         {
@@ -181,11 +193,16 @@ public class PlayerController : MonoBehaviour
         rbody.velocity = Vector3.zero;
     }
 
+    public float respawnTimer = 1f;
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Branch")) // probs wont end up this way
         {
-            Respawn();
+            if(animator)
+                animator.SetTrigger("Impact");
+
+            Invoke("Respawn", 1f);
         }
     }
 }
