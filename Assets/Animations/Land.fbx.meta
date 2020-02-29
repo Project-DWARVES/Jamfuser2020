@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: c3c80e623ed38cd4caa31120cff43bdb
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Base
+    100002: BaseSkel
+    100004: Chest
+    100006: ChestC
+    100008: Controls
+    100010: FKSkel
+    100012: Head
+    100014: Head 1
+    100016: Hip
+    100018: HipC
+    100020: IKSkel
+    100022: //RootNode
+    100024: LArmIKC
+    100026: LArmIKFK
+    100028: LArmIKJ
+    100030: LClavical
+    100032: LEar
+    100034: LEarBase
+    100036: LElbow
+    100038: LEye
+    100040: LFoot
+    100042: LHand
+    100044: LHandDirect
+    100046: LHandIKJ
+    100048: LKnee
+    100050: LLeg
+    100052: LLegBase
+    100054: LLegIKC
+    100056: LLegIKFK
+    100058: LLegIKJ
+    100060: LSholder
+    100062: Mesh
+    100064: Neck
+    100066: pasted__Chest
+    100068: pasted__Head
+    100070: pasted__Hip
+    100072: pasted__LClavical
+    100074: pasted__LEar
+    100076: pasted__LEarBase
+    100078: pasted__LElbow
+    100080: pasted__LElbow 1
+    100082: pasted__LEye
+    100084: pasted__LFoot
+    100086: pasted__LFoot 1
+    100088: pasted__LHand
+    100090: pasted__LHand 1
+    100092: pasted__LHandDirect
+    100094: pasted__LHandDirect 1
+    100096: pasted__LKnee
+    100098: pasted__LKnee 1
+    100100: pasted__LLeg
+    100102: pasted__LLeg 1
+    100104: pasted__LLegBase
+    100106: pasted__LLegBase 1
+    100108: pasted__LSholder
+    100110: pasted__LSholder 1
+    100112: pasted__Neck
+    100114: pasted__polySurface16
+    100116: pasted__RClavical
+    100118: pasted__REar
+    100120: pasted__REarBase
+    100122: pasted__RElbow
+    100124: pasted__RElbow 1
+    100126: pasted__REye
+    100128: pasted__RFoot
+    100130: pasted__RFoot 1
+    100132: pasted__RHand
+    100134: pasted__RHand 1
+    100136: pasted__RHandDirect
+    100138: pasted__RHandDirect 1
+    100140: pasted__RKnee
+    100142: pasted__RKnee 1
+    100144: pasted__RLeg
+    100146: pasted__RLeg 1
+    100148: pasted__RLegBase
+    100150: pasted__RLegBase 1
+    100152: pasted__RSholder
+    100154: pasted__RSholder 1
+    100156: pasted__Spine1
+    100158: pasted__Spine2
+    100160: pasted__Spine3
+    100162: pasted__Tail1
+    100164: pasted__Tail1 1
+    100166: pasted__Tail2
+    100168: pasted__Tail2 1
+    100170: pasted__Tail3
+    100172: pasted__Tail3 1
+    100174: pasted__Tail4
+    100176: pasted__Tail4 1
+    100178: pasted__Tail5
+    100180: pasted__Tail5 1
+    100182: pasted__Tounge
+    100184: pasted__Tounge2
+    100186: pasted__Tounge3
+    100188: RArmIKFK
+    100190: RArmIKJ
+    100192: RClavical
+    100194: REar
+    100196: REarBase
+    100198: RElbow
+    100200: REye
+    100202: RFoot
+    100204: RHand
+    100206: RHandDirect
+    100208: RHandIKC
+    100210: RHandIKJ
+    100212: RKnee
+    100214: RLeg
+    100216: RLegBase
+    100218: RLegIKC
+    100220: RLegIKFK
+    100222: RLegIKJ
+    100224: RSholder
+    100226: Spine1
+    100228: Spine1C
+    100230: Spine2
+    100232: Spine2C
+    100234: Spine3
+    100236: Spine3C
+    100238: Tail1
+    100240: Tail2
+    100242: Tail3
+    100244: Tail4
+    100246: Tail5
+    100248: TailIKC
+    100250: TailIKFK
+    100252: TailIKJ
+    100254: Tounge
+    100256: Tounge2
+    100258: Tounge3
+    400000: Base
+    400002: BaseSkel
+    400004: Chest
+    400006: ChestC
+    400008: Controls
+    400010: FKSkel
+    400012: Head
+    400014: Head 1
+    400016: Hip
+    400018: HipC
+    400020: IKSkel
+    400022: //RootNode
+    400024: LArmIKC
+    400026: LArmIKFK
+    400028: LArmIKJ
+    400030: LClavical
+    400032: LEar
+    400034: LEarBase
+    400036: LElbow
+    400038: LEye
+    400040: LFoot
+    400042: LHand
+    400044: LHandDirect
+    400046: LHandIKJ
+    400048: LKnee
+    400050: LLeg
+    400052: LLegBase
+    400054: LLegIKC
+    400056: LLegIKFK
+    400058: LLegIKJ
+    400060: LSholder
+    400062: Mesh
+    400064: Neck
+    400066: pasted__Chest
+    400068: pasted__Head
+    400070: pasted__Hip
+    400072: pasted__LClavical
+    400074: pasted__LEar
+    400076: pasted__LEarBase
+    400078: pasted__LElbow
+    400080: pasted__LElbow 1
+    400082: pasted__LEye
+    400084: pasted__LFoot
+    400086: pasted__LFoot 1
+    400088: pasted__LHand
+    400090: pasted__LHand 1
+    400092: pasted__LHandDirect
+    400094: pasted__LHandDirect 1
+    400096: pasted__LKnee
+    400098: pasted__LKnee 1
+    400100: pasted__LLeg
+    400102: pasted__LLeg 1
+    400104: pasted__LLegBase
+    400106: pasted__LLegBase 1
+    400108: pasted__LSholder
+    400110: pasted__LSholder 1
+    400112: pasted__Neck
+    400114: pasted__polySurface16
+    400116: pasted__RClavical
+    400118: pasted__REar
+    400120: pasted__REarBase
+    400122: pasted__RElbow
+    400124: pasted__RElbow 1
+    400126: pasted__REye
+    400128: pasted__RFoot
+    400130: pasted__RFoot 1
+    400132: pasted__RHand
+    400134: pasted__RHand 1
+    400136: pasted__RHandDirect
+    400138: pasted__RHandDirect 1
+    400140: pasted__RKnee
+    400142: pasted__RKnee 1
+    400144: pasted__RLeg
+    400146: pasted__RLeg 1
+    400148: pasted__RLegBase
+    400150: pasted__RLegBase 1
+    400152: pasted__RSholder
+    400154: pasted__RSholder 1
+    400156: pasted__Spine1
+    400158: pasted__Spine2
+    400160: pasted__Spine3
+    400162: pasted__Tail1
+    400164: pasted__Tail1 1
+    400166: pasted__Tail2
+    400168: pasted__Tail2 1
+    400170: pasted__Tail3
+    400172: pasted__Tail3 1
+    400174: pasted__Tail4
+    400176: pasted__Tail4 1
+    400178: pasted__Tail5
+    400180: pasted__Tail5 1
+    400182: pasted__Tounge
+    400184: pasted__Tounge2
+    400186: pasted__Tounge3
+    400188: RArmIKFK
+    400190: RArmIKJ
+    400192: RClavical
+    400194: REar
+    400196: REarBase
+    400198: RElbow
+    400200: REye
+    400202: RFoot
+    400204: RHand
+    400206: RHandDirect
+    400208: RHandIKC
+    400210: RHandIKJ
+    400212: RKnee
+    400214: RLeg
+    400216: RLegBase
+    400218: RLegIKC
+    400220: RLegIKFK
+    400222: RLegIKJ
+    400224: RSholder
+    400226: Spine1
+    400228: Spine1C
+    400230: Spine2
+    400232: Spine2C
+    400234: Spine3
+    400236: Spine3C
+    400238: Tail1
+    400240: Tail2
+    400242: Tail3
+    400244: Tail4
+    400246: Tail5
+    400248: TailIKC
+    400250: TailIKFK
+    400252: TailIKJ
+    400254: Tounge
+    400256: Tounge2
+    400258: Tounge3
+    2100000: lambert1
+    4300000: pasted__polySurface16
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pasted__polySurface16
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
