@@ -47,10 +47,9 @@ public class PlayerController : MonoBehaviour
             player = ReInput.players.GetPlayer(playerID);
 
             GameObject _hat = Instantiate(HatManager.instance.LoadHat(playerID), hatTransform.position, hatTransform.rotation, hatTransform);
-            _hat.transform.localPosition = Vector3.zero;
+            //_hat.transform.localPosition = Vector3.zero;
             
-            Debug.LogError(PlayerPrefs.GetInt("Player1").ToString());
-            Debug.LogError("Not AI");
+            
             isAI = false; // is not AI
         }
         catch
@@ -58,8 +57,8 @@ public class PlayerController : MonoBehaviour
             // must be AI if playerID doesnt exists, so let the AI script do its thing
             // do get a random hat
             players = FindObjectsOfType<PlayerController>(); 
-            nut = FindObjectOfType<NUT>();
         }
+        nut = FindObjectOfType<NUT>();
     }
 
     protected virtual void FixedUpdate()
@@ -131,7 +130,7 @@ public class PlayerController : MonoBehaviour
             #endregion
 
             // try to boost on cooldown
-            //doBoost();
+            doBoost();
 
             Vector3 dirToTarget = (target - this.transform.position).normalized;
 
@@ -150,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         if(boostCooldownTimer >= boostCooldown)
         {
-            Debug.Log("Player " + playerID + " used Boost");
+            //Debug.Log("Player " + playerID + " used Boost");
 
             boostCooldownTimer = 0;
 
@@ -167,12 +166,11 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         //Play Death Sound
-
-        StartCoroutine(CO_Respawn(respawnDelay));
         if (nut.player == this)
         {
             nut.OnDrop();
         }
+        StartCoroutine(CO_Respawn(respawnDelay));
     }
 
     IEnumerator CO_Respawn(float respawnTime)
