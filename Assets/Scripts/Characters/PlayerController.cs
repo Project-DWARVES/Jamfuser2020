@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = 0.0f;
         float moveVertical = 0.0f;
 
-        if(!isAI)
+        if(!isAI) // if is a player, do player things
         {
             // standard move bits
             moveHorizontal = player.GetAxis("MoveHorizontal");
@@ -76,19 +76,15 @@ public class PlayerController : MonoBehaviour
             // extra abilities 
             if (player.GetButtonDown("Boost") && (boostCooldown <= boostCooldownTimer))
             {
-                Debug.Log("Player " + playerID + " used Boost");
-
-                boostCooldownTimer = 0;
-
-                rbody.AddForce(movement * boostForce, ForceMode.Impulse);
+                doBoost();
             }
 
             if (player.GetButtonDown("UseItem"))
             {
-                Debug.Log("Player " + playerID + " used Item");
+                doUseItem();
             }
         }
-        else
+        else // if AI, do things by itself
         {
             PlayerController currentClosest = this;
             foreach (PlayerController t in players)
