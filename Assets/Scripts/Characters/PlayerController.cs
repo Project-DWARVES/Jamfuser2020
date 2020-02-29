@@ -180,4 +180,12 @@ public class PlayerController : MonoBehaviour
         transform.position = spawnTransform.position;
         rbody.velocity = Vector3.zero;
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Branch")) // probs wont end up this way
+        {
+            Respawn();
+        }
+    }
 }
