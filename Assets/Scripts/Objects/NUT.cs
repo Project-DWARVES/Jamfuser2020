@@ -12,7 +12,6 @@ public class NUT : Pickup
         transform.SetParent(spawnPosition);
         player = null;
         TogglePickupCooldown();
-        GetComponent<Collider>().enabled = true;
     }
 
     void TogglePickupCooldown()
@@ -23,6 +22,7 @@ public class NUT : Pickup
 
     void EnablePickup()
     {
+        GetComponent<Collider>().enabled = true;
         canBePickedUp = true;
     }
 
