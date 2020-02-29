@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_Score
-  m_Shader: {fileID: 4800000, guid: 010faa82b38781b47a1da4906ca2688f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9cb4fa9253f18a34aa317cf52b773edb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -67,6 +67,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Percentages: 1
     - _Player0: 0.35
     - _Player1: 0.08
     - _Player2: 0.33

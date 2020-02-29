@@ -9,10 +9,9 @@ public class ScoreManager : MonoBehaviour
 
     NUT nut;
 
-    public List<float> playerPercentages = new List<float>();
-    public List<Color> playerColours = new List<Color>();
-    public List<Slider> playerSliders = new List<Slider>();
-    public Material scoreMaterial;
+    public float[] playerPercentages = {0.25f, 0.25f, 0.25f, 0.25f};
+    public Color[] playerColours;
+    public Material material;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -21,12 +20,8 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         nut = FindObjectOfType<NUT>();
-        if(scoreMaterial)
-        {
-            scoreMaterial.SetColorArray("Colours", playerColours);
-            scoreMaterial.SetFloatArray("Percentages", playerPercentages);
-        }
     }
+
 
     void UpdateUI()
     {
@@ -39,8 +34,17 @@ public class ScoreManager : MonoBehaviour
 
         for(int i = 0; i < timeHoldingNut.Count; i++)
         {
-            playerSliders[i].value = timeHoldingNut[i] / totalTime;
-            playerPercentages[i] = playerSliders[i].value;
+            playerPercentages[i] = timeHoldingNut[i] / totalTime;
+        }
+
+        if(material)
+        {
+            Shader.EnableKeyword("_Colours");
+            material.SetColorArray(Shader.PropertyToID("_Colours"), playerColours);
+            Shader.DisableKeyword("_Colours");
+            Shader.EnableKeyword("_Percentages");
+            material.SetFloatArray(Shader.PropertyToID("_Percentages"), playerPercentages);
+            Shader.DisableKeyword("_Percentages");
         }
     }
 
