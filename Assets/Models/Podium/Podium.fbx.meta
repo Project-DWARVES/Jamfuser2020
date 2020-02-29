@@ -1,17 +1,47 @@
 fileFormatVersion: 2
-guid: 006b1484990c196469479773f62ee73d
+guid: 8b5e044486d175c47868175099ff6a43
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: polySurface58
+    100002: polySurface17
+    100004: polySurface18
+    100006: polySurface19
+    100008: polySurface20
+    100010: polySurface21
+    100012: polySurface22
     400000: //RootNode
-    400002: polySurface58
-    2100000: lambert2
-    2300000: polySurface58
-    3300000: polySurface58
-    4300000: polySurface58
-  externalObjects: {}
+    400002: polySurface17
+    400004: polySurface18
+    400006: polySurface19
+    400008: polySurface20
+    400010: polySurface21
+    400012: polySurface22
+    2100000: lambert1
+    2300000: polySurface17
+    2300002: polySurface18
+    2300004: polySurface19
+    2300006: polySurface20
+    2300008: polySurface21
+    2300010: polySurface22
+    3300000: polySurface17
+    3300002: polySurface18
+    3300004: polySurface19
+    3300006: polySurface20
+    3300008: polySurface21
+    3300010: polySurface22
+    4300000: polySurface17
+    4300002: polySurface18
+    4300004: polySurface19
+    4300006: polySurface20
+    4300008: polySurface21
+    4300010: polySurface22
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 0a00ab2f85ab02148a17b9b73f42e2b5, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
