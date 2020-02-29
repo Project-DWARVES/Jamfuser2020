@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b749d73c9977874ba890394ed0db496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialRotation: {x: 0, y: 30}
+  initialRotation: {x: 0, y: 0}
   obstaclesAmount: {x: 0, y: 10}
   obstacleLocations:
   - transform: {fileID: 6367164047244077988}
