@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [Header("AI bits")]
     [SerializeField] bool isAI = true; // assume its an AI
     PlayerController[] players = new PlayerController[4];
+    NUT nut;
 
 
     protected virtual void Start()
@@ -46,7 +47,8 @@ public class PlayerController : MonoBehaviour
             player = ReInput.players.GetPlayer(playerID);
 
             GameObject _hat = Instantiate(HatManager.instance.LoadHat(playerID), hatTransform.position, hatTransform.rotation, hatTransform);
-            _hat.transform.localPosition = Vector3.zero;
+            //_hat.transform.localPosition = Vector3.zero;
+            
             
             isAI = false; // is not AI
         }
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
             // do get a random hat
             players = FindObjectsOfType<PlayerController>(); 
         }
+        nut = FindObjectOfType<NUT>();
     }
 
     protected virtual void FixedUpdate()
@@ -85,8 +88,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         else // if AI, do things by itself
-        {
-            PlayerController currentClosest = this;
+        {   
+            Vector3 target = this.transform.position;
+            #region AI bully script
+            /*
             foreach (PlayerController t in players)
             {
                 float currentClosestDist = 999;
@@ -96,12 +101,38 @@ public class PlayerController : MonoBehaviour
                     if (distance < currentClosestDist)
                     {
                         currentClosestDist = distance;
-                        currentClosest = t;
+                        target = t.transform.position;
                     }
                 }
-            }
+            }*/
+            #endregion
 
-            Vector3 dirToTarget = (currentClosest.transform.position - this.transform.position).normalized;
+            #region AI nut hunter script
+
+            if (nut.player != null)
+            {
+                target = nut.player.transform.position;
+            }
+            else if(nut.player == this)
+            {
+                target = nut.spawnPosition.transform.position;
+            }
+            else
+            {
+                target = nut.transform.position;
+            }
+            /* 
+            is it that simple?? always aim for the nut?
+            when a player has it, everyone will swarm that player,
+            when the AI has it, evade??? currently just sits still 
+            when it gets drop, the nut zooms back to the center, the ai will chase that
+            */
+            #endregion
+
+            // try to boost on cooldown
+            doBoost();
+
+            Vector3 dirToTarget = (target - this.transform.position).normalized;
 
             movement = new Vector3(dirToTarget.x, 0, dirToTarget.z);
         }
@@ -118,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         if(boostCooldownTimer >= boostCooldown)
         {
-            Debug.Log("Player " + playerID + " used Boost");
+            //Debug.Log("Player " + playerID + " used Boost");
 
             boostCooldownTimer = 0;
 
@@ -135,7 +166,10 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         //Play Death Sound
-
+        if (nut.player == this)
+        {
+            nut.OnDrop();
+        }
         StartCoroutine(CO_Respawn(respawnDelay));
     }
 
@@ -145,5 +179,13 @@ public class PlayerController : MonoBehaviour
 
         transform.position = spawnTransform.position;
         rbody.velocity = Vector3.zero;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Branch")) // probs wont end up this way
+        {
+            Respawn();
+        }
     }
 }
