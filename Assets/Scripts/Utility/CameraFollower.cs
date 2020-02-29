@@ -47,7 +47,7 @@ public class CameraFollower : MonoBehaviour
         float angleBetween = Vector3.Angle(transform.forward, (pos - cameraPos).normalized);
 
         int i = 0;
-        while(angleBetween > GetComponent<Camera>().fieldOfView / 2)
+        while(angleBetween > GetComponent<Camera>().fieldOfView / 3)
         {
             distanceToMove += 1f;
             cameraPos -= transform.forward;

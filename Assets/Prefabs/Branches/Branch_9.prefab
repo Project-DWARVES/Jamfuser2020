@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3242460472213603040}
   m_Layer: 0
   m_Name: Branch_9
-  m_TagString: Untagged
+  m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3242460472213905088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3242460472213603042}
   m_Father: {fileID: 0}
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3242460472213603042}
   - component: {fileID: 3242460472217027264}
   - component: {fileID: 3242460472215896064}
+  - component: {fileID: 3538997232025483160}
   m_Layer: 0
   m_Name: Branch_9
   m_TagString: Untagged
@@ -109,6 +110,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3538997232025483160
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242460472213905090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 68f682672fe505b48b60607b41cdbce4, type: 3}
 --- !u!1 &3242460472213905092
 GameObject:
   m_ObjectHideFlags: 0
