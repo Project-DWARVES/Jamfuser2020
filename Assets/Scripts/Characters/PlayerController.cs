@@ -6,7 +6,7 @@ using Rewired;
 public class PlayerController : MonoBehaviour
 {
     AudioSource audioSource;
-    Rigidbody rbody;
+    protected Rigidbody rbody;
 
     [Header("Setup")]
     public Transform hatTransform;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float boostForce;
     public float boostCooldown;
     float boostCooldownTimer;
+    Vector3 movement;
 
     [Header("Game Variables")]
     ICollectable currentCollectable = null;
@@ -27,34 +28,95 @@ public class PlayerController : MonoBehaviour
     public int playerID = 0;
     [SerializeField] private Player player;
 
-    void Start()
+
+    [Header("AI bits")]
+    [SerializeField] bool isAI = true; // assume its an AI
+    PlayerController[] players = new PlayerController[4];
+
+
+    protected virtual void Start()
     {
         //Component Assignment
         audioSource = GetComponent<AudioSource>();
         rbody = GetComponent<Rigidbody>();
 
         //Init
-        player = ReInput.players.GetPlayer(playerID);
+        try // try to initialise as a player
+        {
+            player = ReInput.players.GetPlayer(playerID);
 
-        GameObject _hat = Instantiate(HatManager.instance.LoadHat(playerID), hatTransform.position, hatTransform.rotation, hatTransform);
-        _hat.transform.localPosition = Vector3.zero;
+            GameObject _hat = Instantiate(HatManager.instance.LoadHat(playerID), hatTransform.position, hatTransform.rotation, hatTransform);
+            _hat.transform.localPosition = Vector3.zero;
+            
+            isAI = false; // is not AI
+        }
+        catch
+        {
+            // must be AI if playerID doesnt exists, so let the AI script do its thing
+            // do get a random hat
+            players = FindObjectsOfType<PlayerController>(); 
+        }
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         //BoostCooldown
         boostCooldownTimer += Time.deltaTime;
 
-        float moveHorizontal = player.GetAxis("MoveHorizontal");
-        float moveVertical = player.GetAxis("MoveVertical");
+        float moveHorizontal = 0.0f;
+        float moveVertical = 0.0f;
 
-        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+        if(!isAI) // if is a player, do player things
+        {
+            // standard move bits
+            moveHorizontal = player.GetAxis("MoveHorizontal");
+            moveVertical = player.GetAxis("MoveVertical");
+            movement = new Vector3(moveHorizontal, 0, moveVertical);
+
+            // extra abilities 
+            if (player.GetButtonDown("Boost") && (boostCooldown <= boostCooldownTimer))
+            {
+                doBoost();
+            }
+
+            if (player.GetButtonDown("UseItem"))
+            {
+                doUseItem();
+            }
+        }
+        else // if AI, do things by itself
+        {
+            PlayerController currentClosest = this;
+            foreach (PlayerController t in players)
+            {
+                float currentClosestDist = 999;
+                if (t != this)
+                {
+                    float distance = (t.transform.position - this.transform.position).magnitude;
+                    if (distance < currentClosestDist)
+                    {
+                        currentClosestDist = distance;
+                        currentClosest = t;
+                    }
+                }
+            }
+
+            Vector3 dirToTarget = (currentClosest.transform.position - this.transform.position).normalized;
+
+            movement = new Vector3(dirToTarget.x, 0, dirToTarget.z);
+        }
+
+
+
         rbody.AddForce(movement * speed);
-
         rbody.rotation = Quaternion.Euler(0.0f, 0.0f, rbody.velocity.x * -tilt);
 
 
-        if (player.GetButtonDown("Boost") && (boostCooldown <= boostCooldownTimer))
+    }
+
+    void doBoost()
+    {
+        if(boostCooldownTimer >= boostCooldown)
         {
             Debug.Log("Player " + playerID + " used Boost");
 
@@ -62,12 +124,13 @@ public class PlayerController : MonoBehaviour
 
             rbody.AddForce(movement * boostForce, ForceMode.Impulse);
         }
-
-        if (player.GetButtonDown("UseItem"))
-        {
-            Debug.Log("Player " + playerID + " used Item");
-        }
     }
+
+    void doUseItem()
+    {
+        Debug.Log("Player " + playerID + " used Item");
+    }
+
 
     public void Respawn()
     {
