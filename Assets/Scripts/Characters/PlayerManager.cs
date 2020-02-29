@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Range(1, 4)]
-    public int numberOfPlayers;
-
     public PlayerController[] playerPrefab;
 
     public Transform[] spawnPoints;
@@ -22,33 +19,35 @@ public class PlayerManager : MonoBehaviour
     void Initialise()
     {
         if (PlayerPrefs.GetInt("Player0") == 1)
-            SpawnPlayer(0);
+            SpawnPlayer(0, false);
+        else
+            SpawnPlayer(0, true);
+
         if (PlayerPrefs.GetInt("Player1") == 1)
-            SpawnPlayer(1);
+            SpawnPlayer(1, false);
+        else
+            SpawnPlayer(1, true);
+
         if (PlayerPrefs.GetInt("Player2") == 1)
-            SpawnPlayer(2);
+            SpawnPlayer(2, false);
+        else
+            SpawnPlayer(2, true);
+
         if (PlayerPrefs.GetInt("Player3") == 1)
-            SpawnPlayer(3);
+            SpawnPlayer(3, false);
+        else
+            SpawnPlayer(3, true);
 
-
-
-        if (numberOfPlayers == 1)
-        {
-            SpawnAIPlayers();
-        }
     }
 
-    void SpawnPlayer(int player)
+    void SpawnPlayer(int player, bool isAi)
     {
         PlayerController _player = Instantiate(playerPrefab[player], spawnPoints[player]);
         _player.playerID = player;
+        _player.isAI = isAi;
         _player.spawnTransform = spawnPoints[player];
         cameraFollower?.playerTransforms.Add(_player.transform);
     }
 
-    void SpawnAIPlayers()
-    {
-        //Do some funky AI shit here
-    }
 
 }

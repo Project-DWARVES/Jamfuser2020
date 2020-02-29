@@ -63,7 +63,7 @@ public class HatSelector : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f)
+        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f && !isReady)
         {
             timer = 0f;
             CycleHat(Mathf.CeilToInt(player.GetAxis("MoveHorizontal")));
@@ -75,18 +75,22 @@ public class HatSelector : MonoBehaviour
             {
                 hasJoined = true;
                 graphics.SetActive(true);
+                CharacterSelectScreen.instance.PlayerJoined();
                 return;
             }
 
-            GetReady();
-        }
+            if (!isReady)
+            {
+                GetReady();
+                return;
+            }
 
-        if (player.GetButtonDown("StartButton"))
-        {
-            if (isReady)
+            if (isReady && CharacterSelectScreen.instance.CheckIfGameStart())
             {
                 CharacterSelectScreen.instance.StartGame();
             }
+
+
         }
     }
 
