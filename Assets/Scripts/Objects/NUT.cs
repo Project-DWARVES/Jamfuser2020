@@ -10,6 +10,7 @@ public class NUT : Pickup
     public override void OnDrop()
     {
         transform.SetParent(spawnPosition);
+        GetComponent<MeshRenderer>().enabled = true;
         player = null;
         TogglePickupCooldown();
     }
@@ -28,8 +29,9 @@ public class NUT : Pickup
 
     public override void OnPickup()
     {
+        GetComponent<MeshRenderer>().enabled = false;
         transform.SetParent(player.transform);
-        transform.position = player.transform.position;
+        transform.position = player.transform.position - new Vector3(0, .5f, 0);
         GetComponent<Collider>().enabled = false;
     }
 
@@ -38,18 +40,6 @@ public class NUT : Pickup
         base.Update();
 
         transform.position = new Vector3(transform.position.x, spawnPosition.position.y, transform.position.z);
-        rBody.MovePosition(Vector3.Lerp(transform.position, player ? player.transform.position : spawnPosition.position, Time.deltaTime * nutSpeed));
-    }
-
-    /// <summary>
-    /// OnGUI is called for rendering and handling GUI events.
-    /// This function can be called multiple times per frame (one call per event).
-    /// </summary>
-    void OnGUI()
-    {
-        if(GUI.Button(new Rect(0, 0, 60, 60), "NUT"))
-        {
-            OnDrop();
-        }
+        rBody.MovePosition(Vector3.Lerp(transform.position, player ? player.transform.position - new Vector3(0, .5f, 0) : spawnPosition.position, Time.deltaTime * nutSpeed));
     }
 }

@@ -50,10 +50,8 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 c = tex2D(_MainTex, i.uv);
                 int index = 0;
-
-                fixed4 c = tex2D (_MainTex, i.uv);
 
                 if(i.uv.x < _Percentages[0])
                     index = 0;
@@ -65,9 +63,13 @@
                     index = 3;
 
                 // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
+                UNITY_APPLY_FOG(i.fogCoord, c);
 
-                return c * _Colours[index].rgbr;
+                #ifdef UNITY_UI_ALPHACLIP
+                clip (c.a - 0.001);
+                #endif
+
+                return c * fixed4(_Colours[index].rgb, c.a);
             }
             ENDCG
         }

@@ -125,4 +125,4 @@ MonoBehaviour:
   player: {fileID: 0}
   spawnPosition: {fileID: 0}
   nutSpeed: 2
-  pickupCooldown: 3
+  pickupCooldown: 0.2
