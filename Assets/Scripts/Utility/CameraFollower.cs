@@ -14,6 +14,7 @@ public class CameraFollower : MonoBehaviour
     public float avoidanceSpeed = 1f;
     // Player transforms to keep track of
     public List<Transform> playerTransforms;
+    [HideInInspector] public bool active = true;
 
     // Centre between all players
     Vector3 idealPosition;
@@ -79,11 +80,14 @@ public class CameraFollower : MonoBehaviour
     
     void FixedUpdate()
     {
-        CalculateIdealPosition();
+        if(active)
+        {
+            CalculateIdealPosition();
 
-        idealPosition.y = playerTransforms[0].position.y + followDistance + ZoomChange();
+            idealPosition.y = playerTransforms[0].position.y + followDistance + ZoomChange();
 
-        rigidbody.MovePosition(Vector3.Lerp(transform.position, idealPosition, Time.deltaTime * avoidanceSpeed));
+            rigidbody.MovePosition(Vector3.Lerp(transform.position, idealPosition, Time.deltaTime * avoidanceSpeed));
+        }
     }
 
     void OnCollisionStay(Collision other)
