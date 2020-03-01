@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("AI bits")]
-    [SerializeField] bool isAI = true; // assume its an AI
+    [SerializeField] public bool isAI = false; // assume its NOT an AI
     PlayerController[] players = new PlayerController[4];
     NUT nut;
 
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             //_hat.transform.localPosition = Vector3.zero;
             
             
-            isAI = false; // is not AI
+            //isAI = false; // is not AI
         }
         catch
         {

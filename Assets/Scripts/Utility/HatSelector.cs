@@ -6,6 +6,8 @@ using Rewired;
 
 public class HatSelector : MonoBehaviour
 {
+    Animator animator;
+
     public List<GameObject> hatCollection = new List<GameObject>();
     public int playerID;
     public int selectedHat = 0;
@@ -17,6 +19,8 @@ public class HatSelector : MonoBehaviour
 
     //SelectionTimer
     float timer;
+    float animTimer;
+    float animRandom;
 
     //Ready
     bool hasJoined = false;
@@ -24,6 +28,7 @@ public class HatSelector : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         player = ReInput.players.GetPlayer(playerID);
 
         foreach (GameObject hat in hatCollection)
@@ -32,6 +37,8 @@ public class HatSelector : MonoBehaviour
         }
 
         graphics.SetActive(false);
+
+        NewRandomInterval();
 
         hatCollection[Mathf.CeilToInt(selectedHat)].SetActive(true);
     }
@@ -52,9 +59,11 @@ public class HatSelector : MonoBehaviour
 
     void Update()
     {
+        Animate();
+
         timer += Time.deltaTime;
 
-        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f)
+        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f && !isReady)
         {
             timer = 0f;
             CycleHat(Mathf.CeilToInt(player.GetAxis("MoveHorizontal")));
@@ -66,18 +75,22 @@ public class HatSelector : MonoBehaviour
             {
                 hasJoined = true;
                 graphics.SetActive(true);
+                CharacterSelectScreen.instance.PlayerJoined();
                 return;
             }
 
-            GetReady();
-        }
+            if (!isReady)
+            {
+                GetReady();
+                return;
+            }
 
-        if (player.GetButtonDown("StartButton"))
-        {
-            if (isReady)
+            if (isReady && CharacterSelectScreen.instance.CheckIfGameStart())
             {
                 CharacterSelectScreen.instance.StartGame();
             }
+
+
         }
     }
 
@@ -89,8 +102,22 @@ public class HatSelector : MonoBehaviour
         HatManager.instance.ConfirmHat(playerID, selectedHat);
     }
 
-    void JoinGame()
+    void Animate()
     {
+        animTimer += Time.deltaTime;
 
+        if (animTimer > animRandom)
+        {
+            animator.SetTrigger("Fidget");
+            NewRandomInterval();
+        }
     }
+
+    void NewRandomInterval()
+    {
+        animTimer = 0;
+        animRandom = Random.Range(2f, 6f);
+    }
+
+
 }

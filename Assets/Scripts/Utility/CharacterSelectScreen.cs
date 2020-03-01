@@ -17,12 +17,28 @@ public class CharacterSelectScreen : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    float playersJoined = 0;
+    float playersReady = 0;
+
+    public bool CheckIfGameStart()
+    {
+        if (playersReady == playersJoined)
+            return true;
+        else
+            return false;
+    }
+
+    public void Start()
     {
         PlayerPrefs.DeleteKey("Player0");
         PlayerPrefs.DeleteKey("Player1");
         PlayerPrefs.DeleteKey("Player2");
         PlayerPrefs.DeleteKey("Player3");
+
+        PlayerPrefs.SetInt("Player0", 0);
+        PlayerPrefs.SetInt("Player1", 0);
+        PlayerPrefs.SetInt("Player2", 0);
+        PlayerPrefs.SetInt("Player3", 0);
     }
     public void StartGame()
     {
@@ -32,6 +48,12 @@ public class CharacterSelectScreen : MonoBehaviour
     public void PlayerReady(int playerNumber)
     {
         PlayerPrefs.SetInt("Player" + playerNumber, 1);
+        playersReady++;
+    }
+
+    public void PlayerJoined()
+    {
+        playersJoined++;
     }
 
 }
