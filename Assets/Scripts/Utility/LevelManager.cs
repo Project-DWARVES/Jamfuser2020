@@ -21,8 +21,11 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> segmentPrefabs;
     GameObject[] segments;
 
+    public bool active = true;
+
     // The number of segments of the level will be calculated at the start of the level, and will be progressively toggled on/off
     int numberOfSegments;
+    bool hasEnded = false;
 
     void CalculateNumberOfSegments()
     {
@@ -51,6 +54,22 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        level.GetComponent<Rigidbody>().MovePosition(level.position - level.transform.up * fallingSpeed * Time.deltaTime);
+        if(active)
+        {
+            level.GetComponent<Rigidbody>().MovePosition(level.position - level.transform.up * fallingSpeed * Time.deltaTime);
+            levelTimer -= Time.deltaTime;
+        }
+
+        if(!hasEnded && levelTimer <= 0)
+        {
+            EndGame();
+        }
+    }
+
+    void EndGame()
+    {
+        active = false;
+        hasEnded = true;
+        FindObjectOfType<LevelEnd>().endLevel();
     }
 }

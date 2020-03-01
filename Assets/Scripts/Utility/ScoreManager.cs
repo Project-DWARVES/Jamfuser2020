@@ -22,6 +22,50 @@ public class ScoreManager : MonoBehaviour
         nut = FindObjectOfType<NUT>();
     }
 
+    public int GetScorePosition(int player)
+    {
+        int index = 1;
+        float percent = playerPercentages[player];
+
+        for(int  i = 0; i < 4; i++)
+        {
+            if(i != player)
+            {
+                if(playerPercentages[i] < percent)
+                    index++;
+                else
+                    index--;
+            }
+        }
+
+        return Mathf.Clamp(index, 1, 4);
+    }
+
+    public int[] GetScorePositions()
+    {
+        int[] ranks = {0, 1, 2, 3};
+
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = i + 1; j < 4; j++)
+            {
+                if(playerPercentages[i] < playerPercentages[j])
+                {
+                    float aux = playerPercentages[i];
+                    playerPercentages[i] = playerPercentages[j];
+                    playerPercentages[j] = aux;
+
+                    int _aux = ranks[i];
+                    ranks[i] = ranks[j];
+                    ranks[j] = _aux;
+                }
+            }
+        }
+
+        Debug.Log(ranks[0] + " " + ranks[1] + " " + ranks[2] + " " + ranks[3]);
+
+        return ranks;
+    }
 
     void UpdateUI()
     {
