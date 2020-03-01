@@ -25,10 +25,12 @@ public class HatSelector : MonoBehaviour
     //Ready
     bool hasJoined = false;
     bool isReady = false;
+    bool startScreenProgressed = false;
+    bool controlScreenProgressed = false;
 
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInParent<Animator>();
         player = ReInput.players.GetPlayer(playerID);
 
         foreach (GameObject hat in hatCollection)
@@ -59,19 +61,31 @@ public class HatSelector : MonoBehaviour
 
     void Update()
     {
-        Animate();
+        if (hasJoined)
+            Animate();
+
 
         timer += Time.deltaTime;
 
-        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f && !isReady)
-        {
-            timer = 0f;
-            CycleHat(Mathf.CeilToInt(player.GetAxis("MoveHorizontal")));
-        }
 
         if (player.GetButtonDown("Boost"))
         {
-            if (!hasJoined)
+            if (!startScreenProgressed && playerID == 0)
+            {
+                startScreenProgressed = true;
+                animator.SetBool("StartScreen", true);
+                return;
+            }
+
+            if (!controlScreenProgressed && playerID == 0)
+            {
+                controlScreenProgressed = true;
+                //animate to Player Selected
+                animator.SetBool("ControlScreen", true);
+                return;
+            }
+
+            if (!hasJoined && animator.GetBool("ControlScreen") == true)
             {
                 hasJoined = true;
                 graphics.SetActive(true);
@@ -79,7 +93,7 @@ public class HatSelector : MonoBehaviour
                 return;
             }
 
-            if (!isReady)
+            if (!isReady && animator.GetBool("ControlScreen") == true)
             {
                 GetReady();
                 return;
@@ -90,7 +104,12 @@ public class HatSelector : MonoBehaviour
                 CharacterSelectScreen.instance.StartGame();
             }
 
+        }
 
+        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.2f && !isReady)
+        {
+            timer = 0f;
+            CycleHat(Mathf.CeilToInt(player.GetAxis("MoveHorizontal")));
         }
     }
 
