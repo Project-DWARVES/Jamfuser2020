@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class PlayerController : MonoBehaviour
     public Transform hatTransform;
     public Transform spawnTransform;
     public float respawnDelay;
+
+    [Header("Particle systems")]
+    public ParticleSystem hasNut;
+    public ParticleSystem hitTree;
+    public ParticleSystem hitPlayer;
 
     [HideInInspector] public Animator animator;
 
@@ -52,14 +58,14 @@ public class PlayerController : MonoBehaviour
             player = ReInput.players.GetPlayer(playerID);
 
 
-if(!isAI)
-{
+        if(!isAI)
+        {
             GameObject _hat = Instantiate(HatManager.instance.LoadHat(playerID), hatTransform.position, hatTransform.rotation, hatTransform);
-}
-else
-{
-    GameObject _hat = Instantiate(HatManager.instance.hatCollection[Random.Range(0, (HatManager.instance.hatCollection.Count-1))], hatTransform.position, hatTransform.rotation, hatTransform);
-}            //_hat.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            GameObject _hat = Instantiate(HatManager.instance.hatCollection[Random.Range(0, (HatManager.instance.hatCollection.Count-1))], hatTransform.position, hatTransform.rotation, hatTransform);
+        }            //_hat.transform.localPosition = Vector3.zero;
             
             
             //isAI = false; // is not AI
@@ -104,22 +110,6 @@ else
             else // if AI, do things by itself
             {   
                 Vector3 target = this.transform.position;
-                #region AI bully script
-                /*
-                foreach (PlayerController t in players)
-                {
-                    float currentClosestDist = 999;
-                    if (t != this)
-                    {
-                        float distance = (t.transform.position - this.transform.position).magnitude;
-                        if (distance < currentClosestDist)
-                        {
-                            currentClosestDist = distance;
-                            target = t.transform.position;
-                        }
-                    }
-                }*/
-                #endregion
 
                 #region AI nut hunter script
 
@@ -153,11 +143,33 @@ else
                 movement = new Vector3(dirToTarget.x, 0, dirToTarget.z);
             }
 
-
-
             rbody.AddForce(movement * speed);
             rbody.rotation = Quaternion.Euler(0.0f, 0.0f, rbody.velocity.x * -tilt);
 
+        }
+
+        if(nut.player == this && flying)
+        {
+            if(hasNut)
+                hasNut.gameObject.SetActive(true);
+        }
+        else if(hasNut || !flying)
+        {
+            hasNut.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void Update()
+    {
+        if(!flying)
+        {
+            if(player.GetButtonDown("Boost") && playerID == 0)
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
@@ -204,6 +216,21 @@ else
 
     public float respawnTimer = 1f;
 
+    void ResetTreeHitParticles()
+    {
+        hitTree.gameObject.SetActive(false);
+    }
+
+    void ResetPlayerHitParticles()
+    {
+        hitPlayer.gameObject.SetActive(false);
+    }
+
+    void ResetHoldNutParticles()
+    {
+        hasNut.gameObject.SetActive(false);
+    }
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Branch")) // probs wont end up this way
@@ -211,7 +238,21 @@ else
             if(animator)
                 animator.SetTrigger("Impact");
 
+            if(hitTree)
+            {
+                hitTree.gameObject.SetActive(true);
+                Invoke("ResetTreeHitParticles", hitTree.main.startLifetime.constantMax);
+            }
+
             Invoke("Respawn", 1f);
+        }
+        else if(other.gameObject.GetComponentInChildren<PlayerController>())
+        {
+            if(hitPlayer)
+            {
+                hitPlayer.gameObject.SetActive(true);
+                Invoke("ResetPlayerHitParticles", hitPlayer.main.startLifetime.constantMax);
+            }
         }
     }
 }

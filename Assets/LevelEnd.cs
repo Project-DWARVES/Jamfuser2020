@@ -10,6 +10,7 @@ public class LevelEnd : MonoBehaviour
     bool[] placedPlayers = new bool[4];
     public Transform cameraPosition;
     PlayerController[] players = new PlayerController[4];
+    public ParticleSystem confetti;
 
     ScoreManager scoreManager;
 
@@ -40,6 +41,11 @@ public class LevelEnd : MonoBehaviour
         {
             endGameUI.GetComponent<Image>().color = new Color(0, 0, 0, endGameUI.GetComponent<Image>().color.a + 0.05f);
             yield return new WaitForEndOfFrame();
+        }
+
+        if(confetti)
+        {
+            confetti.gameObject.SetActive(true);
         }
 
         Camera.main.transform.position = cameraPosition.position;
