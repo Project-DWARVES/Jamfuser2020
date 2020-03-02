@@ -17,8 +17,8 @@ public class CharacterSelectScreen : MonoBehaviour
     }
     #endregion
 
-    float playersJoined = 0;
-    float playersReady = 0;
+    public float playersJoined = 0;
+    public float playersReady = 0;
 
     public bool CheckIfGameStart()
     {

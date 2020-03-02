@@ -70,6 +70,15 @@ public class HatSelector : MonoBehaviour
 
         if (player.GetButtonDown("Boost"))
         {
+            if(playerID != 0)
+            {
+                foreach(InputActionSourceData i in player.GetCurrentInputSources("Boost"))
+                {
+                    if(i.controller.type == ControllerType.Keyboard)
+                        return;
+                }
+            }
+
             if (!startScreenProgressed && playerID == 0)
             {
                 startScreenProgressed = true;
@@ -95,6 +104,7 @@ public class HatSelector : MonoBehaviour
 
             if (!isReady && animator.GetBool("ControlScreen") == true)
             {
+
                 GetReady();
                 return;
             }
@@ -106,7 +116,7 @@ public class HatSelector : MonoBehaviour
 
         }
 
-        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.2f && !isReady)
+        if (player.GetAxis("MoveHorizontal") != 0 && timer > 0.5f && !isReady)
         {
             timer = 0f;
             CycleHat(Mathf.CeilToInt(player.GetAxis("MoveHorizontal")));

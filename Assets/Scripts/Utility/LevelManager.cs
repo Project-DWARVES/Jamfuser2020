@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class LevelManager : MonoBehaviour
     public GameObject endPrefab;
     // Segment prefabs
     public List<GameObject> segmentPrefabs;
+    public Text timerText;
     GameObject[] segments;
 
     public bool active = true;
@@ -52,14 +54,20 @@ public class LevelManager : MonoBehaviour
         GenerateSegments();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(active)
         {
-            level.GetComponent<Rigidbody>().MovePosition(level.position - level.transform.up * fallingSpeed * Time.deltaTime);
-            levelTimer -= Time.deltaTime;
-        }
+            level.GetComponent<Rigidbody>().MovePosition(level.position - level.transform.up * fallingSpeed * Time.fixedDeltaTime);
+            levelTimer -= Time.fixedDeltaTime;
 
+            if(timerText)
+                timerText.text = ((int)levelTimer).ToString();
+        }
+    }
+
+    private void Update() 
+    {
         if(!hasEnded && levelTimer <= 0)
         {
             EndGame();
@@ -70,6 +78,9 @@ public class LevelManager : MonoBehaviour
     {
         active = false;
         hasEnded = true;
+        if(timerText)
+            timerText.gameObject.SetActive(false);
+        level.GetComponentInChildren<NUT>().gameObject.SetActive(false);
         FindObjectOfType<LevelEnd>().endLevel();
     }
 }

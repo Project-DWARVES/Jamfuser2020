@@ -68,6 +68,8 @@ public class LevelEnd : MonoBehaviour
                 players[_ranks[i]].animator.SetTrigger("Loss");
         }
 
+        GameObject.Find("UI_Score").SetActive(false);
+
         yield return new WaitForSeconds(intermission);
 
         endGameUI.GetComponent<Image>().color = new Color(0, 0, 0, 0);

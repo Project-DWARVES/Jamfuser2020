@@ -101,8 +101,6 @@ public class ScoreManager : MonoBehaviour
             foreach(PlayerController pc in FindObjectsOfType<PlayerController>())
                 timeHoldingNut.Add(pc.playerID, 0);
 
-        Debug.Log(timeHoldingNut.Count);
-
         if(nut.player)
             timeHoldingNut[nut.player.playerID] += Time.deltaTime;
 
